@@ -4,45 +4,31 @@ import 'package:newsly/cubit/navigation_cubit.dart';
 import 'package:newsly/ui/bookmark/bookmark_screen.dart';
 import 'package:newsly/ui/home/home_screen.dart';
 
-class BottomNavigation extends StatefulWidget {
+class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
 
-  @override
-  State<BottomNavigation> createState() => _BottomNavigationState();
-}
-
-class _BottomNavigationState extends State<BottomNavigation> {
-  List<Widget> screens = [];
-
-  _init() {
-    screens.add(HomeScreen());
-    screens.add(BookmarkScreen());
-  }
-
-  @override
-  void initState() {
-    _init();
-    super.initState();
-  }
+  static final List<Widget> screens = [HomeScreen(), BookmarkScreen()];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(index: NavigationCubit().state, children: screens),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
-          NavigationCubit().onChange(
-            Change(currentState: NavigationCubit().state, nextState: index),
-          );
-        },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Bookmark',
+    return BlocBuilder<NavigationCubit, int>(
+      builder: (context, state) {
+        return Scaffold(
+          body: IndexedStack(index: state, children: screens),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: state,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) => context.read<NavigationCubit>().changePage(index),
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bookmark),
+                label: 'Bookmark',
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
