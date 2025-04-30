@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newsly/ui/bottom_navigation.dart';
-import 'package:newsly/utils/navigation/navigation.dart';
+import 'package:newsly/ui/route/app_route.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -20,7 +19,9 @@ class SplashScreen extends StatelessWidget {
 
   navigate(BuildContext context) {
     Future.delayed(Duration(seconds: 3)).then((value) {
-      if (context.mounted) context.pushAndRemoveUntil(BottomNavigation());
+      if (context.mounted) {
+        Navigator.pushReplacementNamed(context, RouteNames.tabBox);
+      }
     });
   }
 }

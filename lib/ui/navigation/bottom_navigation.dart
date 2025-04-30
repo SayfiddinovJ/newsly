@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsly/cubit/navigation_cubit.dart';
-import 'package:newsly/ui/bookmark/bookmark_screen.dart';
-import 'package:newsly/ui/home/home_screen.dart';
+
+import 'bookmark/bookmark_screen.dart';
+import 'home/home_screen.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});

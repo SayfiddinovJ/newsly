@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsly/ui/splash/splash_screen.dart';
+import 'package:newsly/ui/route/app_route.dart';
 import 'package:newsly/utils/theme/app_theme.dart';
 
 import 'cubit/navigation_cubit.dart';
@@ -32,14 +32,16 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       minTextAdapt: true,
       ensureScreenSize: true,
-      builder: (context, child) => child!,
       designSize: const Size(375, 812),
-      child: MaterialApp(
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        home: const SplashScreen(),
-      ),
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          initialRoute: RouteNames.splashScreen,
+          onGenerateRoute: AppRoutes.generateRoute,
+        );
+      },
     );
   }
 }
