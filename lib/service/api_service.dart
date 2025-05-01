@@ -6,7 +6,7 @@ import 'package:newsly/data/models/universal_data.dart';
 import 'package:newsly/utils/constants/constants.dart';
 
 class ApiService {
-  static Future<UniversalData> getEveryThing() async {
+  Future<UniversalData> getEveryThing() async {
     try {
       Uri url = Uri.parse('$baseUrl/everything?q=News&apiKey=$apiKey');
       http.Response response = await http.get(url);

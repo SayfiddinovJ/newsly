@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/ui/route/app_route.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -20,6 +22,7 @@ class SplashScreen extends StatelessWidget {
   navigate(BuildContext context) {
     Future.delayed(Duration(seconds: 3)).then((value) {
       if (context.mounted) {
+        context.read<NewsBloc>().add(GetEverythingNewsEvent());
         Navigator.pushReplacementNamed(context, RouteNames.tabBox);
       }
     });

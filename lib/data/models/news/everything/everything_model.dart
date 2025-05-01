@@ -13,10 +13,10 @@ class EverythingModel {
 
   factory EverythingModel.fromJson(Map<String, dynamic> json) {
     return EverythingModel(
-      status: json["status"],
-      totalResults: json["totalResults"],
+      status: json["status"] ?? '',
+      totalResults: json["totalResults"] ?? '',
       articles: List<ArticlesModel>.from(
-        json["articles"].map((x) => ArticlesModel.fromJson(x)),
+        json["articles"].map((x) => ArticlesModel.fromJson(x)) ?? [],
       ),
     );
   }

@@ -21,14 +21,14 @@ class ArticlesModel {
 
   factory ArticlesModel.fromJson(Map<String, dynamic> json) {
     return ArticlesModel(
-      sourceName: json['source']['name'],
-      author: json['author'],
-      title: json['title'],
-      description: json['description'],
-      url: json['url'],
-      urlToImage: json['urlToImage'],
-      publishedAt: json['publishedAt'],
-      content: json['content'],
+      sourceName: json['source']['name'] ?? '',
+      author: json['author'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      url: json['url'] ?? '',
+      urlToImage: json['urlToImage'] ?? '',
+      publishedAt: json['publishedAt'] ?? '',
+      content: json['content'] ?? '',
     );
   }
 }
