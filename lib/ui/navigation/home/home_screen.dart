@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/data/models/form_status.dart';
-import 'package:newsly/ui/route/app_route.dart';
-import 'package:newsly/utils/extensions/extensions.dart';
+import 'package:newsly/ui/widgets/news_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,25 +21,7 @@ class HomeScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: state.news.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(state.news[index].title, maxLines: 1),
-                  subtitle: Text(
-                    state.news[index].description,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  trailing: Text(
-                    formatDateTime(state.news[index].publishedAt),
-                    maxLines: 2,
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      RouteNames.newsDetail,
-                      arguments: state.news[index],
-                    );
-                  },
-                );
+                return NewsTile(article: state.news[index], onTap: () {});
               },
             );
           }
