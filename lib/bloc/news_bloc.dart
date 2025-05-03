@@ -1,8 +1,7 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:newsly/data/models/form_status.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsly/data/form_status.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
-import 'package:newsly/data/models/universal_data.dart';
+import 'package:newsly/data/universal_data.dart';
 import 'package:newsly/repositories/repository.dart';
 
 part 'news_event.dart';

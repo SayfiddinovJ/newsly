@@ -1,6 +1,5 @@
 part of 'news_bloc.dart';
 
-@immutable
 final class NewsState {
   final List<ArticlesModel> news;
   final String error;

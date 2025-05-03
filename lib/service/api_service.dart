@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:newsly/data/models/news/everything/everything_model.dart';
-import 'package:newsly/data/models/universal_data.dart';
+import 'package:newsly/data/universal_data.dart';
 import 'package:newsly/utils/constants/constants.dart';
 
 class ApiService {
