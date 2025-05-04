@@ -1,62 +1,85 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
+import 'package:newsly/ui/route/app_route.dart';
 import 'package:newsly/utils/extensions/extensions.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NewsDetailScreen extends StatelessWidget {
-  const NewsDetailScreen({super.key, required this.article});
-
   final ArticlesModel article;
+
+  const NewsDetailScreen({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(article.sourceName),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.bookmark_border)),
         ],
+        scrolledUnderElevation: 0,
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.r),
-            child: CachedNetworkImage(imageUrl: article.urlToImage),
-          ),
-          Text('Title: ${article.title}'),
-          Text('Content: ${article.content}'),
-          Text('Description: ${article.description}'),
-          Text('Author: ${article.author}'),
-          Text('Published at: ${formatDateTime(article.publishedAt)}'),
-          Text('Url: ${article.url}'),
-          Text('Source name: ${article.sourceName}'),
-        ],
-      ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FloatingActionButton(
-              heroTag: 'share',
-              onPressed: () {
-                // Share action
-              },
-              tooltip: 'Share',
-              child: Icon(Icons.share),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.w),
+              child: CachedNetworkImage(
+                imageUrl: article.urlToImage,
+                height: 220.h,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                placeholder:
+                    (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                errorWidget:
+                    (context, url, error) => Icon(Icons.image_not_supported),
+              ),
             ),
-            Spacer(),
-            FloatingActionButton(
-              heroTag: 'open_chrome',
-              onPressed: () {
-                // Open in Chrome action
-              },
-              tooltip: 'Open in Chrome',
-              child: Icon(Icons.open_in_browser),
+            16.ph,
+            Text(
+              article.title,
+              style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+            ),
+            8.ph,
+            Text(
+              formatDateTime(article.publishedAt),
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+            16.ph,
+            Text(article.description, style: TextStyle(fontSize: 16.sp)),
+            12.ph,
+            Text(article.content, style: TextStyle(fontSize: 16.sp)),
+            16.ph,
+            Text("Author: ${article.author}"),
+            Text("Source: ${article.sourceName}"),
+            24.ph,
+            ElevatedButton.icon(
+              onPressed:
+                  () => Navigator.pushNamed(
+                    context,
+                    RouteNames.webView,
+                    arguments: article.url,
+                  ),
+              icon: Icon(Icons.open_in_browser),
+              label: Text("Open in web", style: TextStyle(fontSize: 16.sp)),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 48.h),
+              ),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          SharePlus.instance.share(ShareParams(uri: Uri.parse(article.url)));
+        },
+        icon: Icon(Icons.share),
+        label: Text('Share'),
       ),
     );
   }

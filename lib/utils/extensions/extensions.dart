@@ -10,5 +10,5 @@ extension Space on num {
 
 String formatDateTime(String isoDate) {
   DateTime dateTime = DateTime.parse(isoDate).toLocal();
-  return DateFormat('dd MMMM, \nyyyy \n– HH:mm').format(dateTime);
+  return DateFormat('dd MMMM, yyyy – HH:mm').format(dateTime);
 }

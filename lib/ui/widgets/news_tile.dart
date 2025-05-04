@@ -11,27 +11,40 @@ class NewsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(10.r),
-        child: CachedNetworkImage(
-          imageUrl: article.urlToImage,
-          height: 65.w,
-          width: 70.w,
-          fit: BoxFit.fill,
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+    return Card(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+      elevation: 4,
+      child: ListTile(
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(10.r),
+          child: CachedNetworkImage(
+            imageUrl: article.urlToImage,
+            height: 75.w,
+            width: 80.w,
+            fit: BoxFit.fill,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
+        title: Text(
+          article.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          article.description,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        ),
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            RouteNames.newsDetail,
+            arguments: article,
+          );
+        },
       ),
-      title: Text(article.title, maxLines: 1),
-      subtitle: Text(
-        article.description,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 2,
-      ),
-      onTap: () {
-        Navigator.pushNamed(context, RouteNames.newsDetail, arguments: article);
-      },
     );
   }
 }

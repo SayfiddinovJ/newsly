@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
 import 'package:newsly/ui/navigation/bottom_navigation.dart';
 import 'package:newsly/ui/navigation/subs/news_detail_screen.dart';
+import 'package:newsly/ui/navigation/subs/news_web_view.dart';
 import 'package:newsly/ui/splash/splash_screen.dart';
 
 class RouteNames {
   static const String splashScreen = "/";
   static const String tabBox = "/tab_box";
   static const String newsDetail = "/news_detail";
+  static const String webView = "/web_view";
 }
 
 class AppRoutes {
@@ -25,6 +27,11 @@ class AppRoutes {
               (context) => NewsDetailScreen(
                 article: settings.arguments as ArticlesModel,
               ),
+        );
+      case RouteNames.webView:
+        return MaterialPageRoute(
+          builder:
+              (context) => NewsWebViewScreen(url: settings.arguments as String),
         );
       default:
         return MaterialPageRoute(
