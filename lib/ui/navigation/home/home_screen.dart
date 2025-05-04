@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsly/ui/navigation/home/views/all_news_view.dart';
+import 'package:newsly/utils/theme/app_theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,6 +32,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         title: Text('Newsly'),
         scrolledUnderElevation: 0,
         bottom: TabBar(
+          indicatorColor: AppTheme.primaryColor,
+          dividerHeight: 0,
+          labelColor: AppTheme.primaryColor,
+          labelPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 15.w),
           controller: tabController,
           isScrollable: true,
           tabAlignment: TabAlignment.start,

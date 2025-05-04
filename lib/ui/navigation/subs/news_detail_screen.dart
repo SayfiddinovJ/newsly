@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
 import 'package:newsly/ui/route/app_route.dart';
 import 'package:newsly/utils/extensions/extensions.dart';
+import 'package:newsly/utils/theme/app_theme.dart';
 import 'package:share_plus/share_plus.dart';
 
 class NewsDetailScreen extends StatelessWidget {
@@ -66,8 +67,12 @@ class NewsDetailScreen extends StatelessWidget {
                     arguments: article.url,
                   ),
               icon: Icon(Icons.open_in_browser),
-              label: Text("Open in web", style: TextStyle(fontSize: 16.sp)),
+              label: Text(
+                "Open in web",
+                style: TextStyle(fontSize: 16.sp, color: AppTheme.primaryColor),
+              ),
               style: ElevatedButton.styleFrom(
+                iconColor: AppTheme.primaryColor,
                 minimumSize: Size(double.infinity, 48.h),
               ),
             ),
@@ -75,6 +80,7 @@ class NewsDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: AppTheme.primaryColor,
         onPressed: () {
           SharePlus.instance.share(ShareParams(uri: Uri.parse(article.url)));
         },
