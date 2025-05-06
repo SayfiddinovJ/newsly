@@ -15,6 +15,10 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     : super(
         NewsState(
           news: [],
+          businessNews: [],
+          techNews: [],
+          healthNews: [],
+          sportsNews: [],
           error: '',
           status: Status.pure,
           article: ArticlesModel(
@@ -30,20 +34,39 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         ),
       ) {
     on<NewsEvent>((event, emit) {});
-    on<GetEverythingNewsEvent>(addProduct);
+    on<GetEverythingNewsEvent>(get);
   }
 
-  Future<void> addProduct(
+  Future<void> get(
     GetEverythingNewsEvent getEverythingNewsEvent,
     Emitter<NewsState> emit,
   ) async {
     emit(state.copyWith(status: Status.loading));
-    UniversalData data = await newsRepository.getNews();
+    UniversalData news = await newsRepository.getNews();
+    UniversalData businessNews = await newsRepository.getBusinessNews(
+      'Business',
+    );
+    UniversalData techNews = await newsRepository.getTechNews('Technology');
+    UniversalData healthNews = await newsRepository.getHealthNews('Health');
+    UniversalData sportsNews = await newsRepository.getSportsNews('Sports');
     emit(state.copyWith(status: Status.loaded));
-    if (data.error.isEmpty) {
-      emit(state.copyWith(status: Status.success, news: data.data!.articles));
+    if (news.error.isEmpty &&
+        businessNews.error.isEmpty &&
+        techNews.error.isEmpty &&
+        healthNews.error.isEmpty &&
+        sportsNews.error.isEmpty) {
+      emit(
+        state.copyWith(
+          status: Status.success,
+          news: news.data.articles,
+          businessNews: businessNews.data.articles,
+          techNews: techNews.data.articles,
+          healthNews: healthNews.data.articles,
+          sportsNews: sportsNews.data.articles,
+        ),
+      );
     } else {
-      emit(state.copyWith(status: Status.error, error: data.error));
+      emit(state.copyWith(status: Status.error, error: news.error));
     }
   }
 }

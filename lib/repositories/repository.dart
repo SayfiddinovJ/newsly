@@ -6,7 +6,17 @@ class NewsRepository {
 
   NewsRepository({required this.apiService});
 
-  Future<UniversalData> getNews() async {
-    return await apiService.getEveryThing();
-  }
+  Future<UniversalData> getNews() => apiService.getEveryThing();
+
+  Future<UniversalData> getBusinessNews(String source) =>
+      apiService.getBySource(source);
+
+  Future<UniversalData> getTechNews(String source) =>
+      apiService.getBySource(source);
+
+  Future<UniversalData> getSportsNews(String source) =>
+      apiService.getBySource(source);
+
+  Future<UniversalData> getHealthNews(String source) =>
+      apiService.getBySource(source);
 }
