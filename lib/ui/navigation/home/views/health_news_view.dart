@@ -17,7 +17,7 @@ class HealthNewsView extends StatelessWidget {
           return Center(child: Text(state.error));
         } else {
           return ListView.builder(
-            itemCount: state.news.length,
+            itemCount: state.healthNews.length,
             itemBuilder: (context, index) {
               return NewsTile(article: state.healthNews[index]);
             },

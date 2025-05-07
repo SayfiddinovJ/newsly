@@ -16,9 +16,8 @@ class BusinessNewsView extends StatelessWidget {
         } else if (state.status == Status.error) {
           return Center(child: Text(state.error));
         } else {
-          print(state.businessNews);
           return ListView.builder(
-            itemCount: state.news.length,
+            itemCount: state.businessNews.length,
             itemBuilder: (context, index) {
               return NewsTile(article: state.businessNews[index]);
             },

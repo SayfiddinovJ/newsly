@@ -4,9 +4,14 @@ import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
 
-class AllNewsView extends StatelessWidget {
+class AllNewsView extends StatefulWidget {
   const AllNewsView({super.key});
 
+  @override
+  State<AllNewsView> createState() => _AllNewsViewState();
+}
+
+class _AllNewsViewState extends State<AllNewsView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewsBloc, NewsState>(

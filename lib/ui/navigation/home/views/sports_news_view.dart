@@ -17,7 +17,7 @@ class SportsNewsView extends StatelessWidget {
           return Center(child: Text(state.error));
         } else {
           return ListView.builder(
-            itemCount: state.news.length,
+            itemCount: state.sportsNews.length,
             itemBuilder: (context, index) {
               return NewsTile(article: state.sportsNews[index]);
             },
