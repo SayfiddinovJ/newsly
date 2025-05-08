@@ -15,6 +15,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     : super(
         NewsState(
           news: [],
+          searchedNews: [],
           businessNews: [],
           techNews: [],
           healthNews: [],
@@ -35,6 +36,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       ) {
     on<NewsEvent>((event, emit) {});
     on<GetEverythingNewsEvent>(get);
+    on<SearchNewsEvent>(search);
   }
 
   Future<void> get(
@@ -63,6 +65,28 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
           techNews: techNews.data.articles,
           healthNews: healthNews.data.articles,
           sportsNews: sportsNews.data.articles,
+        ),
+      );
+    } else {
+      emit(state.copyWith(status: Status.error, error: news.error));
+    }
+  }
+
+  Future<void> search(
+    SearchNewsEvent searchNewsEvent,
+    Emitter<NewsState> emit,
+  ) async {
+    emit(state.copyWith(status: Status.loading));
+    UniversalData news = await newsRepository.search(
+      searchNewsEvent.query,
+      searchNewsEvent.date,
+    );
+    emit(state.copyWith(status: Status.loaded));
+    if (news.error.isEmpty) {
+      emit(
+        state.copyWith(
+          status: Status.success,
+          searchedNews: news.data.articles,
         ),
       );
     } else {

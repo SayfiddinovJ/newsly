@@ -23,10 +23,30 @@ class ApiService {
     }
   }
 
-  Future<UniversalData> getBySource(String source) async {
+  Future<UniversalData> getByCategory(String category) async {
     try {
       Uri url = Uri.parse(
-        '$baseUrl/top-headlines?category=$source&apiKey=$apiKey',
+        '$baseUrl/top-headlines?category=$category&apiKey=$apiKey',
+      );
+      http.Response response = await http
+          .get(url)
+          .timeout(const Duration(seconds: 40));
+      if (response.statusCode == 200) {
+        return UniversalData(
+          data: EverythingModel.fromJson(jsonDecode(response.body)),
+        );
+      } else {
+        return UniversalData(error: jsonDecode(response.body)['message']);
+      }
+    } catch (e) {
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> search(String query, String date) async {
+    try {
+      Uri url = Uri.parse(
+        '$baseUrl/everything?q=$query&from=$date&sortBy=publishedAt&apiKey=$apiKey',
       );
       http.Response response = await http
           .get(url)
