@@ -4,12 +4,20 @@ import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
 
-class HealthNewsView extends StatelessWidget {
+class HealthNewsView extends StatefulWidget {
   const HealthNewsView({super.key});
 
   @override
+  State<HealthNewsView> createState() => _HealthNewsViewState();
+}
+
+class _HealthNewsViewState extends State<HealthNewsView>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<NewsBloc, NewsState>(
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status == Status.loading) {
           return Center(child: CircularProgressIndicator());
@@ -26,4 +34,7 @@ class HealthNewsView extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

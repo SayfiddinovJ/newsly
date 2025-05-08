@@ -11,10 +11,13 @@ class AllNewsView extends StatefulWidget {
   State<AllNewsView> createState() => _AllNewsViewState();
 }
 
-class _AllNewsViewState extends State<AllNewsView> {
+class _AllNewsViewState extends State<AllNewsView>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<NewsBloc, NewsState>(
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status == Status.loading) {
           return Center(child: CircularProgressIndicator());
@@ -31,4 +34,7 @@ class _AllNewsViewState extends State<AllNewsView> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

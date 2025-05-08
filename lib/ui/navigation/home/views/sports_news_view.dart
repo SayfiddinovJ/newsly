@@ -4,12 +4,20 @@ import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
 
-class SportsNewsView extends StatelessWidget {
+class SportsNewsView extends StatefulWidget {
   const SportsNewsView({super.key});
 
   @override
+  State<SportsNewsView> createState() => _SportsNewsViewState();
+}
+
+class _SportsNewsViewState extends State<SportsNewsView>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<NewsBloc, NewsState>(
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status == Status.loading) {
           return Center(child: CircularProgressIndicator());
@@ -26,4 +34,7 @@ class SportsNewsView extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
