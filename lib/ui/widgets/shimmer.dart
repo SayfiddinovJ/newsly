@@ -9,26 +9,45 @@ class ShimmerListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
-      highlightColor: Colors.grey.shade100,
+      highlightColor: Colors.grey,
       child: ListTile(
         leading: Container(
-          width: 48.w,
-          height: 48.w,
+          height: 75.w,
+          width: 80.w,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(10.r),
           ),
         ),
         title: Container(
           height: 16.h,
           width: double.infinity,
-          color: Colors.white,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5.r),
+          ),
         ),
-        subtitle: Container(
-          height: 14.h,
-          width: double.infinity,
-          margin: EdgeInsets.only(top: 8.h),
-          color: Colors.white,
+        subtitle: Column(
+          children: [
+            Container(
+              height: 12.h,
+              width: double.infinity,
+              margin: EdgeInsets.only(top: 8.h),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5.r),
+              ),
+            ),
+            Container(
+              height: 12.h,
+              width: double.infinity,
+              margin: EdgeInsets.only(top: 8.h),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5.r),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
+import 'package:newsly/ui/widgets/shimmer.dart';
 
 class AllNewsView extends StatefulWidget {
   const AllNewsView({super.key});
@@ -20,7 +21,12 @@ class _AllNewsViewState extends State<AllNewsView>
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status == Status.loading) {
-          return Center(child: CircularProgressIndicator());
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return ShimmerListTile();
+            },
+          );
         } else if (state.status == Status.error) {
           return Center(child: Text(state.error));
         } else {

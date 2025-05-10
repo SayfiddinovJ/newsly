@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsly/bloc/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
+import 'package:newsly/ui/widgets/shimmer.dart';
 import 'package:newsly/utils/theme/app_theme.dart';
 
 class TechNewsView extends StatefulWidget {
@@ -21,7 +22,12 @@ class _TechNewsViewState extends State<TechNewsView>
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status == Status.loading) {
-          return Center(child: CircularProgressIndicator());
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return ShimmerListTile();
+            },
+          );
         } else if (state.status == Status.error) {
           return Center(
             child: Text(

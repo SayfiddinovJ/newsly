@@ -6,6 +6,7 @@ import 'package:newsly/ui/route/app_route.dart';
 import 'package:newsly/utils/extensions/extensions.dart';
 import 'package:newsly/utils/theme/app_theme.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final ArticlesModel article;
@@ -35,8 +36,18 @@ class NewsDetailScreen extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 placeholder:
-                    (context, url) =>
-                        Center(child: CircularProgressIndicator()),
+                    (context, url) => Shimmer.fromColors(
+                      baseColor: Colors.grey,
+                      highlightColor: Colors.grey.shade300,
+                      child: Container(
+                        height: 220.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.w),
+                        ),
+                      ),
+                    ),
                 errorWidget:
                     (context, url, error) => Icon(Icons.image_not_supported),
               ),

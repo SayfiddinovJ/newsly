@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
 import 'package:newsly/ui/route/app_route.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NewsTile extends StatelessWidget {
   const NewsTile({super.key, required this.article});
@@ -23,7 +24,19 @@ class NewsTile extends StatelessWidget {
             height: 75.w,
             width: 80.w,
             fit: BoxFit.fill,
-            placeholder: (context, url) => CircularProgressIndicator(),
+            placeholder:
+                (context, url) => Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey,
+                  child: Container(
+                    height: 75.w,
+                    width: 80.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                  ),
+                ),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
