@@ -4,10 +4,6 @@ sealed class NewsEvent {}
 
 class GetNewsEvent extends NewsEvent {}
 
-class RemoveBookmarkNewsEvent extends NewsEvent {}
-
-class GetBookmarkNewsEvent extends NewsEvent {}
-
 class SearchNewsEvent extends NewsEvent {
   final String query;
   final String date;
@@ -16,3 +12,9 @@ class SearchNewsEvent extends NewsEvent {
 }
 
 class GetEverythingNewsEvent extends NewsEvent {}
+
+class AddBookmarkEvent extends NewsEvent {
+  final ArticlesModel article;
+
+  AddBookmarkEvent({required this.article});
+}

@@ -64,7 +64,7 @@ class LocalDatabase {
     allList =
         (await db.query(
           ArticleModelFields.dbTable,
-        )).map((e) => ArticlesModel.fromJson(e)).toList();
+        )).map((e) => ArticlesModel.fromJsonSQ(e)).toList();
     return allList;
   }
 

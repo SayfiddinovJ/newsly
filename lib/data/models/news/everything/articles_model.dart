@@ -1,12 +1,12 @@
 class ArticleModelFields {
   static const String id = "_id";
-  static const String sourceName = "source_name";
+  static const String sourceName = "sourceName";
   static const String author = "author";
   static const String title = "title";
   static const String description = "description";
   static const String url = "url";
-  static const String urlToImage = "url_to_image";
-  static const String publishedAt = "published_at";
+  static const String urlToImage = "urlToImage";
+  static const String publishedAt = "publishedAt";
   static const String content = "content";
 
   static const String dbTable = "article";
@@ -62,6 +62,19 @@ class ArticlesModel {
   factory ArticlesModel.fromJson(Map<String, dynamic> json) {
     return ArticlesModel(
       sourceName: json['source']['name'] ?? '',
+      author: json['author'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      url: json['url'] ?? '',
+      urlToImage: json['urlToImage'] ?? '',
+      publishedAt: json['publishedAt'] ?? '',
+      content: json['content'] ?? '',
+    );
+  }
+
+  factory ArticlesModel.fromJsonSQ(Map<String, dynamic> json) {
+    return ArticlesModel(
+      sourceName: json['name'] ?? '',
       author: json['author'] ?? '',
       title: json['title'] ?? '',
       description: json['description'] ?? '',

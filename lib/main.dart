@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsly/bloc/news_bloc.dart';
+import 'package:newsly/bloc/bookmark/bookmark_bloc.dart';
+import 'package:newsly/bloc/news/news_bloc.dart';
 import 'package:newsly/repositories/repository.dart';
 import 'package:newsly/service/api_service.dart';
 import 'package:newsly/ui/route/app_route.dart';
@@ -32,6 +33,9 @@ class App extends StatelessWidget {
           BlocProvider(create: (context) => NavigationCubit()),
           BlocProvider(
             create: (context) => NewsBloc(context.read<NewsRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => BookmarkBloc(context.read<NewsRepository>()),
           ),
         ],
         child: MyApp(),

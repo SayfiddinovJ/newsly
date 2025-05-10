@@ -1,3 +1,5 @@
+import 'package:newsly/data/local/sqflite.dart';
+import 'package:newsly/data/models/news/everything/articles_model.dart';
 import 'package:newsly/data/universal_data.dart';
 import 'package:newsly/service/api_service.dart';
 
@@ -22,4 +24,12 @@ class NewsRepository {
 
   Future<UniversalData> search(String query, String date) =>
       apiService.search(query, date);
+
+  Future<ArticlesModel> addBookmark(ArticlesModel articleModel) =>
+      LocalDatabase.insert(articleModel);
+
+  Future<UniversalData> remove(String id) =>
+      LocalDatabase.delete(int.parse(id));
+
+  Future<List<ArticlesModel>> getBookmarks() => LocalDatabase.getAll();
 }

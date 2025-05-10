@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsly/bloc/news/news_bloc.dart';
+import 'package:newsly/bloc/bookmark/bookmark_bloc.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
 import 'package:newsly/ui/route/app_route.dart';
 import 'package:newsly/utils/extensions/extensions.dart';
@@ -11,10 +11,10 @@ import 'package:newsly/utils/theme/app_theme.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
 
-class NewsDetailScreen extends StatelessWidget {
+class BookmarkDetailScreen extends StatelessWidget {
   final ArticlesModel article;
 
-  const NewsDetailScreen({super.key, required this.article});
+  const BookmarkDetailScreen({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,10 @@ class NewsDetailScreen extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return CupertinoAlertDialog(
-                    title: Text("Bookmark"),
-                    content: Text("Do you want to bookmark this article?"),
+                    title: Text("Remove Bookmark"),
+                    content: Text(
+                      "Do you want to remove this article from your bookmarks?",
+                    ),
                     actions: [
                       CupertinoDialogAction(
                         child: Text("No"),
@@ -40,8 +42,8 @@ class NewsDetailScreen extends StatelessWidget {
                       CupertinoDialogAction(
                         child: Text("Yes"),
                         onPressed: () {
-                          context.read<NewsBloc>().add(
-                            AddBookmarkEvent(article: article),
+                          context.read<BookmarkBloc>().add(
+                            RemoveBookmarkNewsEvent(id: article.id.toString()),
                           );
                           Navigator.pop(context);
                         },
@@ -51,7 +53,7 @@ class NewsDetailScreen extends StatelessWidget {
                 },
               );
             },
-            icon: Icon(Icons.bookmark_border),
+            icon: Icon(Icons.delete_outline, color: Colors.red),
           ),
         ],
         scrolledUnderElevation: 0,
@@ -91,10 +93,10 @@ class NewsDetailScreen extends StatelessWidget {
               style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
             ),
             8.ph,
-            Text(
-              formatDateTime(article.publishedAt),
-              style: TextStyle(color: Colors.grey[600]),
-            ),
+            // Text(
+            //   formatDateTime(article.publishedAt),
+            //   style: TextStyle(color: Colors.grey[600]),
+            // ),
             16.ph,
             Text(article.description, style: TextStyle(fontSize: 16.sp)),
             12.ph,

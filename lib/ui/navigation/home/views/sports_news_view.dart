@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newsly/bloc/news_bloc.dart';
+import 'package:newsly/bloc/news/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
 import 'package:newsly/ui/widgets/shimmer.dart';
@@ -33,7 +33,10 @@ class _SportsNewsViewState extends State<SportsNewsView>
           return ListView.builder(
             itemCount: state.sportsNews.length,
             itemBuilder: (context, index) {
-              return NewsTile(article: state.sportsNews[index]);
+              return NewsTile(
+                article: state.sportsNews[index],
+                isBookmark: false,
+              );
             },
           );
         }

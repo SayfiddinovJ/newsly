@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text('Newsly'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
         scrolledUnderElevation: 0,
         bottom: TabBar(
           indicatorColor: AppTheme.primaryColor,

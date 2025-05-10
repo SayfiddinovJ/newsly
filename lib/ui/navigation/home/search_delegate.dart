@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsly/bloc/news_bloc.dart';
+import 'package:newsly/bloc/news/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
 import 'package:newsly/ui/widgets/shimmer.dart';
@@ -72,7 +72,7 @@ class ProductSearchDelegate extends SearchDelegate {
             child: ListView.builder(
               itemCount: state.news.length,
               itemBuilder: (context, index) {
-                return NewsTile(article: state.news[index]);
+                return NewsTile(article: state.news[index], isBookmark: false);
               },
             ),
           );

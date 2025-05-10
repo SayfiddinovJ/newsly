@@ -37,6 +37,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     on<NewsEvent>((event, emit) {});
     on<GetEverythingNewsEvent>(get);
     on<SearchNewsEvent>(search);
+    on<AddBookmarkEvent>(addBookmark);
   }
 
   Future<void> get(
@@ -92,5 +93,17 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     } else {
       emit(state.copyWith(status: Status.error, error: news.error));
     }
+  }
+
+  Future<void> addBookmark(
+    AddBookmarkEvent addBookmarkEvent,
+    Emitter<NewsState> emit,
+  ) async {
+    emit(state.copyWith(status: Status.loading));
+    ArticlesModel news = await newsRepository.addBookmark(
+      addBookmarkEvent.article,
+    );
+    print(news);
+    emit(state.copyWith(status: Status.loaded));
   }
 }

@@ -6,9 +6,10 @@ import 'package:newsly/ui/route/app_route.dart';
 import 'package:shimmer/shimmer.dart';
 
 class NewsTile extends StatelessWidget {
-  const NewsTile({super.key, required this.article});
+  const NewsTile({super.key, required this.article, required this.isBookmark});
 
   final ArticlesModel article;
+  final bool isBookmark;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class NewsTile extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            RouteNames.newsDetail,
+            isBookmark ? RouteNames.bookmarkDetail : RouteNames.newsDetail,
             arguments: article,
           );
         },

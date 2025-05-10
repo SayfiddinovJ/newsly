@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newsly/bloc/news_bloc.dart';
+import 'package:newsly/bloc/news/news_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/ui/widgets/news_tile.dart';
 import 'package:newsly/ui/widgets/shimmer.dart';
@@ -39,7 +39,10 @@ class _TechNewsViewState extends State<TechNewsView>
           return ListView.builder(
             itemCount: state.techNews.length,
             itemBuilder: (context, index) {
-              return NewsTile(article: state.techNews[index]);
+              return NewsTile(
+                article: state.techNews[index],
+                isBookmark: false,
+              );
             },
           );
         }
