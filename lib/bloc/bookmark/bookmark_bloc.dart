@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsly/data/form_status.dart';
 import 'package:newsly/data/models/news/everything/articles_model.dart';
-import 'package:newsly/data/universal_data.dart';
 import 'package:newsly/repositories/repository.dart';
 
 part 'bookmark_event.dart';
@@ -49,14 +48,8 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     Emitter<BookmarkState> emit,
   ) async {
     emit(state.copyWith(status: Status.loading));
-    UniversalData news = await newsRepository.remove(
-      removeBookmarkNewsEvent.id,
-    );
+    await newsRepository.remove(removeBookmarkNewsEvent.id);
     emit(state.copyWith(status: Status.loaded));
-    if (news.error.isEmpty) {
-      emit(state.copyWith(status: Status.success));
-    } else {
-      emit(state.copyWith(status: Status.error, error: news.error));
-    }
+    emit(state.copyWith(status: Status.success));
   }
 }

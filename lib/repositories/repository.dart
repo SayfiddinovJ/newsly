@@ -28,8 +28,7 @@ class NewsRepository {
   Future<ArticlesModel> addBookmark(ArticlesModel articleModel) =>
       LocalDatabase.insert(articleModel);
 
-  Future<UniversalData> remove(String id) =>
-      LocalDatabase.delete(int.parse(id));
+  Future<dynamic> remove(int id) => LocalDatabase.delete(id);
 
   Future<List<ArticlesModel>> getBookmarks() => LocalDatabase.getAll();
 }

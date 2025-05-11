@@ -11,7 +11,18 @@ class BookmarkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Newsly'), scrolledUnderElevation: 0),
+      appBar: AppBar(
+        title: Text('Newsly'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<BookmarkBloc>().add(GetBookmarkNewsEvent());
+            },
+            icon: Icon(Icons.refresh),
+          ),
+        ],
+        scrolledUnderElevation: 0,
+      ),
       body: BlocBuilder<BookmarkBloc, BookmarkState>(
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {

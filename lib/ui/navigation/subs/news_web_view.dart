@@ -19,7 +19,7 @@ class _NewsWebViewScreenState extends State<NewsWebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
+            CircularProgressIndicator();
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
@@ -33,7 +33,7 @@ class _NewsWebViewScreenState extends State<NewsWebViewScreen> {
           },
         ),
       )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
+      ..loadRequest(Uri.parse(widget.url));
   }
 
   @override

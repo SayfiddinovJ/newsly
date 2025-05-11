@@ -99,11 +99,6 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     AddBookmarkEvent addBookmarkEvent,
     Emitter<NewsState> emit,
   ) async {
-    emit(state.copyWith(status: Status.loading));
-    ArticlesModel news = await newsRepository.addBookmark(
-      addBookmarkEvent.article,
-    );
-    print(news);
-    emit(state.copyWith(status: Status.loaded));
+    await newsRepository.addBookmark(addBookmarkEvent.article);
   }
 }

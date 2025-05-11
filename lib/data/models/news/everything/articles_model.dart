@@ -74,6 +74,7 @@ class ArticlesModel {
 
   factory ArticlesModel.fromJsonSQ(Map<String, dynamic> json) {
     return ArticlesModel(
+      id: json[ArticleModelFields.id] ?? 0,
       sourceName: json['name'] ?? '',
       author: json['author'] ?? '',
       title: json['title'] ?? '',
@@ -96,5 +97,20 @@ class ArticlesModel {
       ArticleModelFields.publishedAt: publishedAt,
       ArticleModelFields.content: content,
     };
+  }
+
+  @override
+  String toString() {
+    return """
+    id: $id
+    sourceName: $sourceName
+    author: $author
+    title: $title
+    description: $description
+    url: $url
+    urlToImage: $urlToImage
+    publishedAt: $publishedAt
+    content: $content    
+    """;
   }
 }

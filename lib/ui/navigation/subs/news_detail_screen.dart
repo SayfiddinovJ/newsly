@@ -61,31 +61,34 @@ class NewsDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16.w),
-              child: CachedNetworkImage(
-                imageUrl: article.urlToImage,
-                height: 220.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                placeholder:
-                    (context, url) => Shimmer.fromColors(
-                      baseColor: Colors.grey,
-                      highlightColor: Colors.grey.shade300,
-                      child: Container(
-                        height: 220.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16.w),
-                        ),
-                      ),
-                    ),
-                errorWidget:
-                    (context, url, error) => Icon(Icons.image_not_supported),
-              ),
-            ),
             16.ph,
+            article.urlToImage.isNotEmpty
+                ? ClipRRect(
+                  borderRadius: BorderRadius.circular(16.w),
+                  child: CachedNetworkImage(
+                    imageUrl: article.urlToImage,
+                    height: 220.h,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    placeholder:
+                        (context, url) => Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: Colors.grey.shade300,
+                          child: Container(
+                            height: 220.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16.w),
+                            ),
+                          ),
+                        ),
+                    errorWidget:
+                        (context, url, error) =>
+                            Icon(Icons.image_not_supported),
+                  ),
+                )
+                : Placeholder(fallbackHeight: 200),
             Text(
               article.title,
               style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),

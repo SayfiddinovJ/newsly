@@ -3,7 +3,7 @@ part of 'bookmark_bloc.dart';
 sealed class BookmarkEvent {}
 
 class RemoveBookmarkNewsEvent extends BookmarkEvent {
-  final String id;
+  final int id;
 
   RemoveBookmarkNewsEvent({required this.id});
 }

@@ -43,9 +43,12 @@ class BookmarkDetailScreen extends StatelessWidget {
                         child: Text("Yes"),
                         onPressed: () {
                           context.read<BookmarkBloc>().add(
-                            RemoveBookmarkNewsEvent(id: article.id.toString()),
+                            RemoveBookmarkNewsEvent(id: article.id!),
                           );
                           Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Removed from bookmarks')),
+                          );
                         },
                       ),
                     ],
